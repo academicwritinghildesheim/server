@@ -31,3 +31,5 @@ SQLAlchemy==1.4.15
 typing-extensions==3.10.0.0
 Werkzeug==2.0.0
 zipp==3.5.0
+matplotlib==3.4.3
+networkx==2.6.2
