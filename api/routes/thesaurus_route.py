@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify, request
-from odenet import hypernyms_word, synonyms_word, meronyms_word, holonyms_word, antonyms_word, hyponyms_word
+from flask import Blueprint, jsonify, make_response, request
+from odenet import *
 
 
 bp = Blueprint('thesaurus', __name__, url_prefix='/api')
@@ -11,7 +11,14 @@ def get_synonyms():
     example: GET: host/api/synonyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    synonyms = synonyms_word(word)
+    synonym_groups = synonyms_word(word)
+
+    if(not synonym_groups):
+        return jsonify([]), 204
+
+    synonyms = []
+    for synonym_group in synonym_groups:
+        synonyms += synonym_group
     return jsonify(synonyms), 200
 
 
@@ -21,9 +28,15 @@ def get_hypernyms():
     example: GET: host/api/hypernyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    hypernyms = hypernyms_word(word)
-    return jsonify(hypernyms), 200
+    hypernym_groups = hypernyms_word(word)
 
+    if(not hypernym_groups):
+        return jsonify([]), 204
+
+    hypernyms = []
+    for hypernym_group in hypernym_groups:
+        hypernyms += hypernym_group[2]
+    return jsonify(hypernyms), 200
 
 @bp.route('/hyponyms', methods=['GET'])
 def get_hyponyms():
@@ -31,9 +44,15 @@ def get_hyponyms():
     example: GET: host/api/hyponyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    hyponyms = hyponyms_word(word)
-    return jsonify(hyponyms), 200
+    hyponym_groups = hyponyms_word(word)
 
+    if(not hyponym_groups):
+        return jsonify([]), 204
+
+    hyponyms = []
+    for hyponym_group in hyponym_groups:
+        hyponyms += hyponym_group[2]
+    return jsonify(hyponyms), 200
 
 @bp.route('/meronyms', methods=['GET'])
 def get_meronyms():
@@ -41,25 +60,45 @@ def get_meronyms():
     example: GET: host/api/meronyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    meronyms = meronyms_word(word)
+    meronym_groups = meronyms_word(word)
+
+    if(not meronym_groups):
+        return jsonify([]), 204
+
+    meronyms = []
+    for meronym_group in meronym_groups:
+        meronyms += meronym_group[2]
     return jsonify(meronyms), 200
 
-
+    
 @bp.route('/holonyms', methods=['GET'])
 def get_holonyms():
     """
     example: GET: host/api/holonyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    holonyms = holonyms_word(word)
+    holonym_groups = holonyms_word(word)
+
+    if(not holonym_groups):
+        return jsonify([]), 204
+
+    holonyms = []
+    for holonym_group in holonym_groups:
+        holonyms += holonym_group[2]
     return jsonify(holonyms), 200
-
-
+    
 @bp.route('/antonyms', methods=['GET'])
 def get_antonyms():
     """
     example: GET: host/api/antonyms?word=zeigen
     """
     word = request.args.get('word', default='', type=str)
-    antonyms = antonyms_word(word)
+    antonym_groups = antonyms_word(word)
+
+    if(not antonym_groups):
+        return jsonify([]), 204
+
+    antonyms = []
+    for antonym_group in antonym_groups:
+        antonyms += antonym_group[2]
     return jsonify(antonyms), 200
