@@ -34,3 +34,4 @@ zipp==3.5.0
 matplotlib==3.4.3
 networkx==2.6.2
 git+https://github.com/hdaSprachtechnologie/odenet.git
+nltk==3.6.2

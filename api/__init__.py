@@ -44,6 +44,9 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
 
     from .routes import thesaurus_route
     app.register_blueprint(thesaurus_route.bp)
+    
+    from .routes import statistics_route
+    app.register_blueprint(statistics_route.bp)
 
     @app.route('/')
     def index():
