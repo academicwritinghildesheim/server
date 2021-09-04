@@ -38,24 +38,7 @@ python manage.py db migrate
 python manage.py db upgrade
 ```
 
-5. Pandoc
-
-```python
-from pypandoc.pandoc_download import download_pandoc
-
-
-download_pandoc(version='2.0')
-```
-
-6. Odenet
-
- Download repository https://github.com/hdaSprachtechnologie/odenet
- cd into the directory where setup.py is located and execute
- ```bash
- pip install .
- ```
-
-7. Flask-Server starten:
+5. Flask-Server starten:
 
 ```bash
 python run.py

@@ -5,6 +5,7 @@ from flask_script import Manager
 from flask_bcrypt import Bcrypt
 from flask_marshmallow import Marshmallow
 from flask_jwt_extended import JWTManager
+from pypandoc.pandoc_download import download_pandoc
 import os
 
 
@@ -25,6 +26,8 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
 
     app.config.from_object(config_filename)
 
+    download_pandoc(version='2.0')
+
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
@@ -44,7 +47,7 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
 
     from .routes import thesaurus_route
     app.register_blueprint(thesaurus_route.bp)
-    
+
     from .routes import statistics_route
     app.register_blueprint(statistics_route.bp)
 
@@ -65,6 +68,6 @@ def create_manager():
 
     manager.add_command('db', MigrateCommand)
 
-    from .database import paper, user
+    from .database import paper, user, token
 
     return manager

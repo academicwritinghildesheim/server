@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, make_response, request
+from flask import Blueprint, jsonify, request
 from nltk.tokenize import sent_tokenize, word_tokenize
 import string
 
@@ -13,7 +13,7 @@ def get_average_sentence_length():
     text = request.args.get('text', default=None, type=str)
 
     if text is None or "":
-        return jsonify({'success': False}), 400, {'ContentType': 'application/json'}
+        return jsonify({'success': False}), 400
 
     tokenized_text = sent_tokenize(text)
     sentence_count = len(tokenized_text)
@@ -25,8 +25,8 @@ def get_average_sentence_length():
         tokenized_word = word_tokenize(sentence)
         word_count += len(tokenized_word)
 
-    if word_count is 0:
-        return jsonify({'success': False}), 400, {'ContentType': 'application/json'}
+    if word_count == 0:
+        return jsonify({'success': False}), 400
 
     avg_sentence_length = word_count / sentence_count
 
