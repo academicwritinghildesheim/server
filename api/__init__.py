@@ -26,7 +26,7 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
 
     app.config.from_object(config_filename)
 
-    download_pandoc(version='2.0')
+    # download_pandoc(version='2.0')
 
     db.init_app(app)
     ma.init_app(app)
