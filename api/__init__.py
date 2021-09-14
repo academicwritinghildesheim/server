@@ -5,7 +5,7 @@ from flask_script import Manager
 from flask_bcrypt import Bcrypt
 from flask_marshmallow import Marshmallow
 from flask_jwt_extended import JWTManager
-from pypandoc.pandoc_download import download_pandoc
+from flask_cors import CORS
 import os
 
 
@@ -32,6 +32,7 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
     ma.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
+    CORS(app)
 
     from .routes import auth
     app.register_blueprint(auth.bp)
