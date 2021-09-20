@@ -65,7 +65,7 @@ def add_paper():
 
 
 @bp.route('/paper', methods=['PUT'])
-def user_update():
+def paper_update():
     """
     example: PUT: host/api/paper?id=1
     """
@@ -98,7 +98,7 @@ def user_update():
 
 
 @bp.route('/paper', methods=['DELETE'])
-def user_delete():
+def paper_delete():
     """
     example: DELETE: host/api/paper?id=1
     """
