@@ -87,7 +87,7 @@ def paper_update():
         return jsonify(errors), 400
 
     decoded_token = decode_token(access_token)
-    author_id = decoded_token['identity']
+    author_id = decoded_token['sub']
 
     if author_id != paper.author_id:
         return jsonify(message='Keine Berechtigung'), 401
@@ -112,7 +112,7 @@ def paper_delete():
         return jsonify(message='Paper wurde nicht gefunden'), 400
 
     decoded_token = decode_token(access_token)
-    author_id = decoded_token['identity']
+    author_id = decoded_token['sub']
 
     if author_id != paper.author_id:
         return jsonify(message='Keine Berechtigung'), 401
