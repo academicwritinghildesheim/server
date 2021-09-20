@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from api.database.paper import Paper, papers_schema, paper_schema
 from flask_jwt_extended import decode_token
 from api.routes.auth import permission_needed
+from flask_cors import cross_origin
 
 
 bp = Blueprint('paper', __name__, url_prefix='/api')
@@ -65,6 +66,7 @@ def add_paper():
 
 
 @bp.route('/paper', methods=['PUT'])
+@cross_origin()
 def paper_update():
     """
     example: PUT: host/api/paper?id=1
@@ -98,6 +100,7 @@ def paper_update():
 
 
 @bp.route('/paper', methods=['DELETE'])
+@cross_origin()
 def paper_delete():
     """
     example: DELETE: host/api/paper?id=1
