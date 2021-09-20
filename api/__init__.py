@@ -34,6 +34,8 @@ def create_app(config_filename=None, static_folder=None, static_url_path=None):
     jwt.init_app(app)
     CORS(app)
 
+    app.config['CORS_HEADERS'] = 'Content-Type'
+
     from .routes import auth
     app.register_blueprint(auth.bp)
 

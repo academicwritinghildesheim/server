@@ -7,13 +7,6 @@ from api.routes.auth import permission_needed
 bp = Blueprint('paper', __name__, url_prefix='/api')
 
 
-@bp.after_request
-def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
-    return response
-
-
 @bp.route('/paper', methods=['GET'])
 @permission_needed
 def get_paper():
