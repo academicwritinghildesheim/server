@@ -120,3 +120,10 @@ def paper_delete():
     paper.delete()
 
     return jsonify(message='Paper wurde erfolgreich entfernt'), 200
+
+
+@bp.after_request
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    return response
