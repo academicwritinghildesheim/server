@@ -5,7 +5,7 @@ import string
 bp = Blueprint('statistics', __name__, url_prefix='/api')
 
 
-@bp.route('/avg_sentence_length/', methods=['GET'])
+@bp.route('/avg_sentence_length', methods=['GET'])
 def get_average_sentence_length():
     """
     example: GET: host/api/avg_sentence_length?text=This is a sentence. This is one too! How about this one?
